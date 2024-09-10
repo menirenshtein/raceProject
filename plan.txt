@@ -1,0 +1,58 @@
+const numOfCars = document.getElementById("amountOfCars");
+const startRaceBtn = document.getElementById("RaceStart");
+const mainDiv = document.getElementById("mainContainer");
+
+startRaceBtn.addEventListener('click', (() => {
+    const num = numOfCars.value;
+    startRace(num);
+}));
+
+function startRace(num) {
+    // Clear the main container before starting a new race
+    mainDiv.innerHTML = '';
+
+    for (let i = 0; i < num; i++) {
+        const raceLine = document.createElement("div");
+        const finishLine = document.createElement("div");
+        const image = document.createElement("img");
+
+        image.setAttribute("class", "carImage");
+        image.setAttribute("id", `carImage${i}`); // Set unique IDs for each car image
+        finishLine.setAttribute("class", "endOfRoad");
+        raceLine.setAttribute("class", "raceRoad");
+
+        image.src = `./carsImg/car${i+1}.png`;
+        image.style.height = "45px";
+        image.style.width = "60px";
+        image.style.position = "relative"; // Position for movement
+        image.style.left = "0px"; // Start at position 0
+
+        raceLine.appendChild(image);
+        raceLine.style.display = 'flex';
+        raceLine.appendChild(finishLine);
+        mainDiv.appendChild(raceLine);
+    }
+
+    const now = Date.now(); // Correct usage of Date.now()
+    Race(now);
+}
+
+let imageCars = [
+    {
+        carImage: "./carsImg/car1.png",
+        correctPosition: 0,
+        status: "In Race"
+    },
+    {
+        carImage: "./carsImg/car2.png",
+        correctPosition: 0,
+        status: "In Race"
+    },
+    {
+        carImage: "./carsImg/car3.png",
+        correctPosition: 0,
+        status: "In Race"
+    },
+    {
+        carImage: "./carsImg/car4.png",
+        correctPosition: 0
